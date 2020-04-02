@@ -14,4 +14,8 @@ target_link_libraries(${TARGET} PRIVATE precice::precice)
 
 target_include_directories(${TARGET} PRIVATE $ENV{PRECICE_ROOT}/src)
 target_include_directories(${TARGET} PRIVATE $ENV{PRECICE_ROOT}/thirdparty/prettyprint/include)
-set_target_properties(${TARGET} PROPERTIES CXX_STANDARD 11)
+set_target_properties(${TARGET} PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED TRUE
+    CXX_EXTENSIONS FALSE
+    )
