@@ -1,8 +1,7 @@
 #include "Structure0815.hpp"
 
 #include "math.hpp"
-#include "math/geometry.hpp"
-#include "math/math.hpp"
+#include <cassert>
 
 using Eigen::Vector3d;
 using Eigen::VectorXd;
@@ -205,7 +204,7 @@ void Structure0815::computeCharacteristics(
         coords1[i] = _vertices[_faces[index + 1] * _dim + i];
         coords1[i] += _displacements[_faces[index + 1] * _dim + i];
       }
-      double area = geometry::triangleArea(zero, coords0, coords1);
+      double area = math::triangleArea(zero, coords0, coords1);
       area        = std::abs(area); // since it comes out signed from cross-prod
       totalVolume += area;
       if (not math::isZero(area)) {
@@ -213,7 +212,7 @@ void Structure0815::computeCharacteristics(
       }
     }
   } else {
-    assertion(_dim == 3, _dim);
+    assert(_dim == 3);
     VectorXd coords0(zero);
     VectorXd coords1(zero);
     VectorXd coords2(zero);

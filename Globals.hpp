@@ -1,6 +1,8 @@
 #ifndef GLOBALS_HPP_
 #define GLOBALS_HPP_
 
+#include<iostream>
+
 /**
  * @brief For printing to the command line.
  *

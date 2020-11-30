@@ -240,7 +240,6 @@ void Tests::test3D()
   Vector3d        gravity  = Vector3d::Zero();
   VectorXd        vertices = VectorXd::Zero(8 * dim);            // Cube vertex coordinates
   Eigen::VectorXi faces    = Eigen::VectorXi::Zero(6 * 2 * dim); // Triangle vertex indices
-  double          eps      = 1e-13;
 
   vertices << 0.0, 0.0, 0.0, // 0
       1.0, 0.0, 0.0,         // 1
@@ -317,8 +316,8 @@ void Tests::test3D()
       0.0, 0.0, 32.0,
       0.0, 0.0, 32.0,
       0.0, 0.0, 32.0;
-  validate(isEqual(displacements, expected, eps), displacements);
-  validate(isEqual(displDeltas, expected, eps), displDeltas);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(displDeltas, expected), displDeltas);
   expected << 0.0, 0.0, 16.0,
       0.0, 0.0, 16.0,
       0.0, 0.0, 16.0,
@@ -327,8 +326,8 @@ void Tests::test3D()
       0.0, 0.0, 16.0,
       0.0, 0.0, 16.0,
       0.0, 0.0, 16.0;
-  validate(isEqual(velocities, expected, eps), velocities);
-  validate(isEqual(velDeltas, expected, eps), velDeltas);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << 0.0, 1.0, 0.0,
       0.0, 1.0, 0.0,
@@ -349,10 +348,10 @@ void Tests::test3D()
       0.0, 8.0, 0.0,
       0.0, 8.0, 0.0,
       0.0, 8.0, 0.0;
-  validate(isEqual(displacements, expected, eps), displacements);
-  validate(isEqual(displDeltas, expected, eps), displDeltas);
-  validate(isEqual(velocities, expected, eps), velocities);
-  validate(isEqual(velDeltas, expected, eps), velDeltas);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << 1.0, 0.0, 0.0,
       1.0, 0.0, 0.0,
@@ -373,10 +372,10 @@ void Tests::test3D()
       8.0, 0.0, 0.0,
       8.0, 0.0, 0.0,
       8.0, 0.0, 0.0;
-  validate(isEqual(displacements, expected, eps), displacements);
-  validate(isEqual(displDeltas, expected, eps), displDeltas);
-  validate(isEqual(velocities, expected, eps), velocities);
-  validate(isEqual(velDeltas, expected, eps), velDeltas);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << 1.0, 0.0, 0.0,
       1.0, 0.0, 0.0,
@@ -397,7 +396,7 @@ void Tests::test3D()
       -2.0, 0.0, 2.0,
       -2.0, 0.0, 2.0,
       -2.0, 0.0, -2.0;
-  validate(isEqual(displacements, expected, eps), displacements);
+  validate(isEqual(displacements, expected), displacements);
 
   forces << 0.0, 1.0, 0.0,
       0.0, 1.0, 0.0,
@@ -418,7 +417,7 @@ void Tests::test3D()
       0.0, -2.0, -2.0,
       0.0, -2.0, 2.0,
       0.0, -2.0, 2.0;
-  validate(isEqual(displacements, expected, eps), displacements);
+  validate(isEqual(displacements, expected), displacements);
 
   forces << 0.0, 0.0, 1.0,
       0.0, 0.0, -1.0,
@@ -439,7 +438,7 @@ void Tests::test3D()
       2.0, 0.0, -2.0,
       2.0, 0.0, -2.0,
       2.0, 0.0, 2.0;
-  validate(isEqual(displacements, expected, eps), displacements);
+  validate(isEqual(displacements, expected), displacements);
 
   STRUCTURE_DEBUG("  ...done test3D()");
 }
