@@ -1,7 +1,8 @@
+#include<iostream>
+
 #include "Tests.hpp"
 #include "Globals.hpp"
 #include "Structure0815.hpp"
-#include "math/math.hpp"
 
 using precice::math::equals;
 

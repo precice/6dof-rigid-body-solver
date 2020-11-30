@@ -1,10 +1,10 @@
 #ifndef STRUCTURE0815_HPP_
 #define STRUCTURE0815_HPP_
 
-#include "Globals.hpp"
-#include "precice/SolverInterface.hpp"
-#include "utils/Dimensions.hpp"
 #include <fstream>
+#include <Eigen/Core>
+
+#include "Globals.hpp"
 
 using Eigen::VectorXd;
 
@@ -113,7 +113,7 @@ private:
   bool                                   _fixed;
   VectorXd                               _fixture;
   bool                                   _fixedCharacteristics;
-  std::fostream                          _statisticsWriter;
+  std::ofstream                          _statisticsWriter;
 
   /**
    * @brief Computes the center of gravity, total mass and total volume.
