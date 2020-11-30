@@ -1,11 +1,11 @@
 #include "Structure0815.hpp"
 
+#include "math.hpp"
 #include "math/geometry.hpp"
 #include "math/math.hpp"
 
 using Eigen::Vector3d;
 using Eigen::VectorXd;
-
 
 namespace {
     constexpr const char * CSV_TIMESTEPS = "Timesteps";
@@ -208,7 +208,7 @@ void Structure0815::computeCharacteristics(
       double area = geometry::triangleArea(zero, coords0, coords1);
       area        = std::abs(area); // since it comes out signed from cross-prod
       totalVolume += area;
-      if (not precice::math::equals(area, 0.0)) {
+      if (not math::isZero(area)) {
         centerOfGravity += (coords0 + coords1) * area / 3.0;
       }
     }
@@ -241,7 +241,7 @@ void Structure0815::computeCharacteristics(
       double volume = crossVec.dot(vec03) / 6.0;
       volume        = std::abs(volume);
       totalVolume += volume;
-      if (not precice::math::equals(volume, 0.0)) {
+      if (not math::isZero(volume)) {
         centerOfGravity += (coords0 + coords1 + coords2) * volume / 4.0;
       }
     }

@@ -1,10 +1,11 @@
 #include<iostream>
 
+#include "math.hpp"
 #include "Tests.hpp"
 #include "Globals.hpp"
 #include "Structure0815.hpp"
 
-using precice::math::equals;
+using math::isEqual;
 
 #define validate(booleanExpr, msg)                                          \
   if (!(booleanExpr)) {                                                     \
@@ -57,24 +58,24 @@ void Tests::test2D()
   validate(velDeltas.size() == 8, velDeltas.size());
 
   expected.setConstant(0.0);
-  validate(equals(forces, expected), forces);
-  validate(equals(displacements, expected), displacements);
-  validate(equals(velocities, expected), velocities);
-  validate(equals(displDeltas, expected), displDeltas);
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(forces, expected), forces);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   validate(structure.getCenterOfGravity().size() == 2, structure.getCenterOfGravity().size());
-  validate(equals(structure.getCenterOfGravity(), Vector2d(0.5, 0.5)),
+  validate(isEqual(structure.getCenterOfGravity(), Vector2d(0.5, 0.5)),
            structure.getCenterOfGravity());
 
   double dt = 0.0;
   structure.iterate(dt);
 
-  validate(equals(forces, expected), forces);
-  validate(equals(displacements, expected), displacements);
-  validate(equals(velocities, expected), velocities);
-  validate(equals(displDeltas, expected), displDeltas);
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(forces, expected), forces);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << 1.0, 0.0,
       1.0, 0.0,
@@ -85,22 +86,22 @@ void Tests::test2D()
   structure.iterate(dt);
 
   expected = forces;
-  validate(equals(forces, expected), forces);
+  validate(isEqual(forces, expected), forces);
   expected << 4.0, 0.0,
       4.0, 0.0,
       4.0, 0.0,
       4.0, 0.0;
-  validate(equals(displacements, expected), displacements);
-  validate(equals(velocities, expected), velocities);
-  validate(equals(displDeltas, expected), displDeltas);
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   structure.timestep(dt);
 
-  validate(equals(displacements, expected), displacements);
-  validate(equals(velocities, expected), velocities);
-  validate(equals(displDeltas, expected), displDeltas);
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << 0.0, 1.0,
       0.0, 1.0,
@@ -112,22 +113,22 @@ void Tests::test2D()
       8.0, 4.0,
       8.0, 4.0,
       8.0, 4.0;
-  validate(equals(displacements, expected), displacements);
+  validate(isEqual(displacements, expected), displacements);
   expected << 4.0, 4.0,
       4.0, 4.0,
       4.0, 4.0,
       4.0, 4.0;
-  validate(equals(velocities, expected), velocities);
+  validate(isEqual(velocities, expected), velocities);
   expected << 4.0, 4.0,
       4.0, 4.0,
       4.0, 4.0,
       4.0, 4.0;
-  validate(equals(displDeltas, expected), displDeltas);
+  validate(isEqual(displDeltas, expected), displDeltas);
   expected << 0.0, 4.0,
       0.0, 4.0,
       0.0, 4.0,
       0.0, 4.0;
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << -1.0, 0.0,
       -1.0, 0.0,
@@ -139,22 +140,22 @@ void Tests::test2D()
       4.0, 0.0,
       4.0, 0.0,
       4.0, 0.0;
-  validate(equals(displacements, expected), displacements);
+  validate(isEqual(displacements, expected), displacements);
   expected << 0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0;
-  validate(equals(velocities, expected), velocities);
+  validate(isEqual(velocities, expected), velocities);
   expected << 0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0;
-  validate(equals(displDeltas, expected), displDeltas);
+  validate(isEqual(displDeltas, expected), displDeltas);
   expected << -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0;
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   structure.timestep(dt);
   structure.iterate(dt);
@@ -163,22 +164,22 @@ void Tests::test2D()
       0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0;
-  validate(equals(displacements, expected), displacements);
+  validate(isEqual(displacements, expected), displacements);
   expected << -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0;
-  validate(equals(velocities, expected), velocities);
+  validate(isEqual(velocities, expected), velocities);
   expected << -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0;
-  validate(equals(displDeltas, expected), displDeltas);
+  validate(isEqual(displDeltas, expected), displDeltas);
   expected << -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0,
       -4.0, 0.0;
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   structure.timestep(dt);
 
@@ -193,22 +194,22 @@ void Tests::test2D()
       0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0;
-  validate(equals(displacements, expected), displacements);
+  validate(isEqual(displacements, expected), displacements);
   expected << 0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0;
-  validate(equals(velocities, expected), velocities);
+  validate(isEqual(velocities, expected), velocities);
   expected << 0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0,
       0.0, 0.0;
-  validate(equals(displDeltas, expected), displDeltas);
+  validate(isEqual(displDeltas, expected), displDeltas);
   expected << 4.0, 0.0,
       4.0, 0.0,
       4.0, 0.0,
       4.0, 0.0;
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   structure.timestep(dt);
 
@@ -224,7 +225,7 @@ void Tests::test2D()
       rot, rot,
       -rot, rot,
       -rot, -rot;
-  validate(equals(displacements, expected), displacements);
+  validate(isEqual(displacements, expected), displacements);
 
   STRUCTURE_DEBUG("  ...done test2D()");
 }
@@ -278,24 +279,24 @@ void Tests::test3D()
   validate(velDeltas.size() == 24, velDeltas.size());
 
   expected.setConstant(0.0);
-  validate(equals(forces, expected), forces);
-  validate(equals(displacements, expected), displacements);
-  validate(equals(velocities, expected), velocities);
-  validate(equals(displDeltas, expected), displDeltas);
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(forces, expected), forces);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   validate(structure.getCenterOfGravity().size() == 3, structure.getCenterOfGravity().size());
-  validate(equals(structure.getCenterOfGravity(), Vector3d(0.5, 0.5, 0.5)),
+  validate(isEqual(structure.getCenterOfGravity(), Vector3d(0.5, 0.5, 0.5)),
            structure.getCenterOfGravity());
 
   double dt = 0.0;
   structure.iterate(dt);
 
-  validate(equals(forces, expected), forces);
-  validate(equals(displacements, expected), displacements);
-  validate(equals(velocities, expected), velocities);
-  validate(equals(displDeltas, expected), displDeltas);
-  validate(equals(velDeltas, expected), velDeltas);
+  validate(isEqual(forces, expected), forces);
+  validate(isEqual(displacements, expected), displacements);
+  validate(isEqual(velocities, expected), velocities);
+  validate(isEqual(displDeltas, expected), displDeltas);
+  validate(isEqual(velDeltas, expected), velDeltas);
 
   forces << 0.0, 0.0, 1.0,
       0.0, 0.0, 1.0,
@@ -316,8 +317,8 @@ void Tests::test3D()
       0.0, 0.0, 32.0,
       0.0, 0.0, 32.0,
       0.0, 0.0, 32.0;
-  validate(equals(displacements, expected, eps), displacements);
-  validate(equals(displDeltas, expected, eps), displDeltas);
+  validate(isEqual(displacements, expected, eps), displacements);
+  validate(isEqual(displDeltas, expected, eps), displDeltas);
   expected << 0.0, 0.0, 16.0,
       0.0, 0.0, 16.0,
       0.0, 0.0, 16.0,
@@ -326,8 +327,8 @@ void Tests::test3D()
       0.0, 0.0, 16.0,
       0.0, 0.0, 16.0,
       0.0, 0.0, 16.0;
-  validate(equals(velocities, expected, eps), velocities);
-  validate(equals(velDeltas, expected, eps), velDeltas);
+  validate(isEqual(velocities, expected, eps), velocities);
+  validate(isEqual(velDeltas, expected, eps), velDeltas);
 
   forces << 0.0, 1.0, 0.0,
       0.0, 1.0, 0.0,
@@ -348,10 +349,10 @@ void Tests::test3D()
       0.0, 8.0, 0.0,
       0.0, 8.0, 0.0,
       0.0, 8.0, 0.0;
-  validate(equals(displacements, expected, eps), displacements);
-  validate(equals(displDeltas, expected, eps), displDeltas);
-  validate(equals(velocities, expected, eps), velocities);
-  validate(equals(velDeltas, expected, eps), velDeltas);
+  validate(isEqual(displacements, expected, eps), displacements);
+  validate(isEqual(displDeltas, expected, eps), displDeltas);
+  validate(isEqual(velocities, expected, eps), velocities);
+  validate(isEqual(velDeltas, expected, eps), velDeltas);
 
   forces << 1.0, 0.0, 0.0,
       1.0, 0.0, 0.0,
@@ -372,10 +373,10 @@ void Tests::test3D()
       8.0, 0.0, 0.0,
       8.0, 0.0, 0.0,
       8.0, 0.0, 0.0;
-  validate(equals(displacements, expected, eps), displacements);
-  validate(equals(displDeltas, expected, eps), displDeltas);
-  validate(equals(velocities, expected, eps), velocities);
-  validate(equals(velDeltas, expected, eps), velDeltas);
+  validate(isEqual(displacements, expected, eps), displacements);
+  validate(isEqual(displDeltas, expected, eps), displDeltas);
+  validate(isEqual(velocities, expected, eps), velocities);
+  validate(isEqual(velDeltas, expected, eps), velDeltas);
 
   forces << 1.0, 0.0, 0.0,
       1.0, 0.0, 0.0,
@@ -396,7 +397,7 @@ void Tests::test3D()
       -2.0, 0.0, 2.0,
       -2.0, 0.0, 2.0,
       -2.0, 0.0, -2.0;
-  validate(equals(displacements, expected, eps), displacements);
+  validate(isEqual(displacements, expected, eps), displacements);
 
   forces << 0.0, 1.0, 0.0,
       0.0, 1.0, 0.0,
@@ -417,7 +418,7 @@ void Tests::test3D()
       0.0, -2.0, -2.0,
       0.0, -2.0, 2.0,
       0.0, -2.0, 2.0;
-  validate(equals(displacements, expected, eps), displacements);
+  validate(isEqual(displacements, expected, eps), displacements);
 
   forces << 0.0, 0.0, 1.0,
       0.0, 0.0, -1.0,
@@ -438,7 +439,7 @@ void Tests::test3D()
       2.0, 0.0, -2.0,
       2.0, 0.0, -2.0,
       2.0, 0.0, 2.0;
-  validate(equals(displacements, expected, eps), displacements);
+  validate(isEqual(displacements, expected, eps), displacements);
 
   STRUCTURE_DEBUG("  ...done test3D()");
 }
