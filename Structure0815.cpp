@@ -6,17 +6,21 @@
 using Eigen::Vector3d;
 using Eigen::VectorXd;
 
+
+namespace {
+    constexpr const char * CSV_TIMESTEPS = "Timesteps";
+    constexpr const char * CSV_TIME = "Time";
+    constexpr const char * CSV_CENTEROFGRAVITY = "Center-of-gravity";
+    constexpr const char * CSV_TOTALMASS = "Total mass";
+    constexpr const char * CSV_TOTALVOLUME = "Total volume";
+};
+
 Structure0815::Structure0815(
     int                   dim,
     double                density,
     const VectorXd &      gravity,
     const VectorXd &      vertices,
-    const Eigen::VectorXi faces)
-    : TIMESTEPS("Timesteps"),
-      TIME("Time"),
-      CENTEROFGRAVITY("Center-of-gravity"),
-      TOTALMASS("Total mass"),
-      TOTALVOLUME("Total volume"),
+    const Eigen::VectorXi faces):
       _dim(dim),
       _density(density),
       _gravity(gravity),
@@ -45,28 +49,10 @@ Structure0815::Structure0815(
   STRUCTURE_INFO("Total mass: " << _totalMass);
   STRUCTURE_INFO("Total volume: " << totalVolume);
 
-  _statisticsWriter.addData(TIMESTEPS, precice::io::TXTTableWriter::INT);
-  _statisticsWriter.addData(TIME, precice::io::TXTTableWriter::DOUBLE);
-  if (dim == 2) {
-    _statisticsWriter.addData(CENTEROFGRAVITY, precice::io::TXTTableWriter::VECTOR2D);
-  } else {
-    _statisticsWriter.addData(CENTEROFGRAVITY, precice::io::TXTTableWriter::VECTOR3D);
-  }
-  _statisticsWriter.addData(TOTALMASS, precice::io::TXTTableWriter::DOUBLE);
-  _statisticsWriter.addData(TOTALVOLUME, precice::io::TXTTableWriter::DOUBLE);
-
-  _statisticsWriter.writeData(TIMESTEPS, _timesteps);
-  _statisticsWriter.writeData(TIME, _time);
-  if (dim == 2) {
-    Eigen::Vector2d centerOfGravity(_centerOfGravity);
-    _statisticsWriter.writeData(CENTEROFGRAVITY, centerOfGravity);
-  } else {
-    assertion(_dim == 3, _dim);
-    Eigen::Vector3d centerOfGravity(_centerOfGravity);
-    _statisticsWriter.writeData(CENTEROFGRAVITY, centerOfGravity);
-  }
-  _statisticsWriter.writeData(TOTALMASS, _totalMass);
-  _statisticsWriter.writeData(TOTALVOLUME, totalVolume);
+  // Write CSV header
+  _statisticsWriter << CSV_TIMESTEPS <<',' << CSV_TIME << ',' << CSV_CENTEROFGRAVITY << ',' << CSV_TOTALMASS << ',' << CSV_TOTALVOLUME << '\n';
+  // Write inital state
+  _statisticsWriter << _timesteps << ',' << _time << ',' << _centerOfGravity << ',' << _totalMass << ',' << totalVolume << '\n' << std::flush;
 }
 
 void Structure0815::fixPoint(
@@ -194,18 +180,8 @@ void Structure0815::timestep(double dt)
     STRUCTURE_INFO("Total volume delta: " << _totalMass / _density - totalVolume);
   }
 
-  _statisticsWriter.writeData(TIMESTEPS, _timesteps);
-  _statisticsWriter.writeData(TIME, _time);
-  if (_dim == 2) {
-    Eigen::Vector2d centerOfGravity2D(centerOfGravity);
-    _statisticsWriter.writeData(CENTEROFGRAVITY, centerOfGravity2D);
-  } else {
-    assertion(_dim == 3, _dim);
-    Eigen::Vector3d centerOfGravity3D(centerOfGravity);
-    _statisticsWriter.writeData(CENTEROFGRAVITY, centerOfGravity3D);
-  }
-  _statisticsWriter.writeData(TOTALMASS, totalMass);
-  _statisticsWriter.writeData(TOTALVOLUME, totalVolume);
+  // Write statistics
+  _statisticsWriter << _timesteps << ',' << _time << ',' << centerOfGravity << ',' << totalMass << ',' << totalVolume << '\n';
 }
 
 void Structure0815::computeCharacteristics(

@@ -2,9 +2,9 @@
 #define STRUCTURE0815_HPP_
 
 #include "Globals.hpp"
-#include "io/TXTTableWriter.hpp"
 #include "precice/SolverInterface.hpp"
 #include "utils/Dimensions.hpp"
+#include <fstream>
 
 using Eigen::VectorXd;
 
@@ -93,13 +93,6 @@ public:
   }
 
 private:
-  // String constants for statistics writer entries
-  const std::string TIMESTEPS;
-  const std::string TIME;
-  const std::string CENTEROFGRAVITY;
-  const std::string TOTALMASS;
-  const std::string TOTALVOLUME;
-
   int                                    _dim;
   double                                 _density;
   VectorXd                               _gravity;
@@ -120,7 +113,7 @@ private:
   bool                                   _fixed;
   VectorXd                               _fixture;
   bool                                   _fixedCharacteristics;
-  precice::io::TXTTableWriter            _statisticsWriter;
+  std::fostream                          _statisticsWriter;
 
   /**
    * @brief Computes the center of gravity, total mass and total volume.
