@@ -1,11 +1,11 @@
 #include <iostream>
 #include <sstream>
+#include <Eigen/Core>
+
 #include "Globals.hpp"
 #include "Structure0815.hpp"
 #include "Tests.hpp"
 #include "precice/SolverInterface.hpp"
-#include "utils/Dimensions.hpp"
-#include "utils/Globals.hpp"
 
 using Eigen::Vector2d;
 using Eigen::VectorXd;
